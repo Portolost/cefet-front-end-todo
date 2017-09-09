@@ -23,6 +23,9 @@ function insereTarefaNaPagina(tarefa) {
     tarefaLiEl.classList.add('marcado');
   }
 
+  // Desafio 3: usar a categoria da tarefa para estilizá-la
+  tarefaLiEl.classList.add('categoria-' + tarefa.categoria);
+
   // Desafio 1: novas tarefas no início
   let primeiraTarefaEl = containerEl.querySelector(':first-child');
   containerEl.insertBefore(tarefaLiEl, primeiraTarefaEl);
@@ -49,11 +52,13 @@ let nomeInputEl = document.querySelector('#nova-tarefa-nome');
 // trouxemos a função para fora e demos um nome para ela
 // para podermos chamá-la em mais de 1 lugar
 function novaTarefa() {
+  // Desafio 3: pegamos o <select> com as categorias
+  let categoriaEl = document.querySelector('#nova-tarefa-categoria');
 
   // cria um novo objeto 'tarefa'
   let novaTarefa = {
     nome: nomeInputEl.value,
-    categoria: 'outros',
+    categoria: categoriaEl.value, // Desafio 3: categoria selecionada
     marcado: false
   };
 
