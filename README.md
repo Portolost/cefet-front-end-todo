@@ -1,154 +1,154 @@
-# Lista de Tarefas para Procrastinar :notebook:
+# Lista de Tarefas para Procrastinar x2 :notebook:
 
-Gerencie aquelas tarefas que você quer ~~não~~ fazer.
+Armazene e recupere as tarefas que você quer ~~não~~ fazer.
 
 ![Resultado final da atividade](docs/resultado-final.png)
 
 ## Atividade
 
-Você deve fazer um sistema para cadastrar novas atividades que você ~~não~~
-quer fazer. Fazendo isso, você vai treinar usar objetos em JavaScript e
-criar elementos HTML dinamicamente.
+Vamos continuar a atividade da lista de tarefas :notebook: mas, desta vez,
+nosso objetivo é exercitar o uso do WebStorage para salvar e carregar
+informações na página.
+
+### ~~Exercício 1: Carregar tarefas existentes~~
+
+Já foi feito :3.
 
 
-### Exercício 1: Carregar **tarefas existentes**
+### ~~Exercício 2: Incluir uma nova tarefa~~
 
-No arquivo `tarefas.js` existe um vetor `tarefas` em que cada objeto
-representa uma tarefa. Ele já possui duas tarefas: "Comprar leite" e
-"Escutar chimbinha".
+Já foi feito :3.
 
-Neste exercício, você deve criar uma função `insereTarefaNaPagina` (no
-singular) que, recebe por parâmetro **01 objeto** com uma tarefa e
-insere 01 elemento HTML `<li>` na lista de tarefas
-(_i.e._, `ul#lista-tarefas`). Veja o FAQ sobre como inserir elementos HTML
-dinamicamente na página. Ele **deve ser inserido ao final**.
 
-O `<li>` que representa a tarefa deve ter uma classe `item-tarefa` para
-que ele seja devidamente estilizado. Se a tarefa está `marcado` como
-`true`, você deve colocar a classe `marcado` no
-`<li class="item-tarefa">...</li>`, além da `item-tarefa`.
+### ~~Desafio 1: Incluir tarefas no topo~~
 
-Depois de criar a função, **chame-a para cada objeto que está no vetor
-`tarefas`**. Logo antes de popular o elemento HTML da lista com as tarefas,
-não se esqueça de remover todos os filhos que estiverem lá.
+Já foi feito :3.
 
-Resultado parcial:
 
-![](docs/resultado-exercicio-1.png)
+### Exercício 3: Salvar e carregar o nome do dono da lista
 
-### Exercício 2: Incluir uma nova tarefa
+A página agora possui um novo _input_ `#nome-usuario` e dois novos botões,
+`#salvar` e `#carregar`.
 
-Quando o usuário clicar no botão `#incluir-nova-tarefa`, (a) crie um
-novo objeto representando a nova tarefa (veja no FAQ), (b) coloque-a ao
-final do vetor `tarefas` (veja no FAQ) e, então, (c) chame a função que
-`insereTarefaNaPagina` passando o objeto da nova tarefa como argumento.
+Faça com que, quando o usuário clicar em `#salvar`, a página armazene no
+_localStorage_ o nome do dono da lista de tarefas (digitado no campo
+`#nome-usuario`). Se precisar, veja o FAQ sobre o Web Storage.
 
-O `nome` da tarefa é o que o usuário digitou no campo, a `categoria` padrão é
-a `'outros'`, a propriedade `marcado` deve ser `false`.
+Use a ferramenta do desenvolvedor, na guia _Application_, para verificar
+o que está salvo no _localStorage_, para ver se funcionou. Veja um exemplo:
 
-Ao final dessa função, você deve **limpar o campo** onde o usuário digitou
-a tarefa (_i.e._, `nova-tarefa-nome`).
+![](docs/ferramenta-exercicio-3.png)
 
-Opcionalmente, você pode **"devolver o foco"** para esse mesmo controle.
-Isso é uma boa prática de Usabilidade que torna a página mais agradável quando
-o usuário vai digitar mais que 1 tarefa - assim que ele inclui uma, ele
-já está pronto para digitar a próxima.
-
-Todo elemento HTML que pode "ter o foco" tem um método `focus()` que
-podemos chamar assim:
-
-```js
-// pede o elemento para "roubar o foco" - mover o cursor para dentro dele
-elemento.focus();
-```
+Além de implementar o botão para salvar, faça também o botão `#carregar` que,
+quando clicado, pega o nome do usuário dono da lista de tarefas e o coloca
+no campo `#nome-usuario`.
 
 Resultado parcial:
 
-![](docs/resultado-exercicio-2.png)
+![](docs/resultado-exercicio-3.png)
 
-### Desafio 1: Mostrar as novas tarefas no início da lista
+### Exercício 4: **Tentar** salvar a lista de tarefas
 
-Em vez de inserir novos itens por último, insira-os no topo da `ul#lista-tarefas`.
-Para isso, lembre-se dos 3 métodos para vincular novos elementos HTML
-na página e escolha o apropriado:
+Agora, na mesma _callback_ de `click` do botão `#salvar`, você deve salvar
+também, no _localStorage_, o vetor `tarefas`.
 
-1. `containerEl.appendChild`
-1. `containerEl.insertBefore`
-1. `containerEl.replaceChild`
+Antes de partir para `#carregar` o vetor de `tarefas`, **abra a ferramenta
+do desenvolvedor e veja o que foi salvo lá**. É o que você esperava?
+
+Para entender o que aconteceu e corrigir esse problema,
+[volte para os _slides_ e continue a aula][formato-de-armazenamento].
 
 
-### Desafio 2: Pressionar "Enter" inclui a tarefa
+### Exercício 5: Salvar e carregar a lista de tarefas
 
-Além do clique no botão, faça com que o pressionar da tecla "Enter",
-quando o foco estiver no campo de texto (_i.e._, `nova-tarefa-nome`), também
-insira a nova tarefa no vetor e na página.
+Agora que você sabe o que aconteceu e o que é JSON, use `JSON.stringify` para
+salvar o vetor `tarefas` no formato JSON e `JSON.parse` para transformar a
+_String_ que foi recuperada do _localStorage_ de volta em um vetor.
 
-Para isso, você pode usar o evento _keyup_ do controle e, dentro da _callback_,
-perguntar qual `e.key` foi pressionada. Se `e.key === 'Enter'`, você pode
-chamar a mesma função que registrou para o clique do botão - se você usou
-uma função definida de forma anônima e _inline_ ¹, agora é uma boa hora para
-movê-la para fora e dar-lhe um nome².
+Lembre-se de que, ao carregar as tarefas, você deve limpar (remover todo
+o conteúdo) o elemento `ul#lista-tarefas`.
 
-¹ função anônima e _inline_:
+Por fim, **remova as duas tarefas de exemplo** do arquivo `tarefas.js`,
+tornando o vetor `tarefas` inicialmente vazio:
 ```js
-botaoEl.addEventListener('click', function(e) {
-  // ... esta função é inline e não possui um nome
-});
+let tarefas = [];
 ```
 
-² função com nome:
-```js
-function novaTarefa(e) {
-  // esta função pode ser chamada em mais de um lugar,
-  // porque ela tem um nome e foi definida "no arquivo"
-}
+Resultado parcial:
 
-botaoEl.addEventListener('click', incluiTarefaNaPagina);
-```
+![](docs/resultado-exercicio-5.png)
 
-### Desafio 3: Escolher a categoria da tarefa
+### Desafio 1: Manter a logomarca aberta ou minimizada
 
-Cada tarefa pode ter uma categoria associada. Descomente o código HTML do
-desafio 3 e escreva código JavaScript que permita que o usuário escolha qual a
-categoria da nova tarefa.
+Vamos fazer o botão `#minimizar` (aquele com um `x` lá no título) funcionar e,
+além disso, persistir seu estado - se a logomarca estiver minimizada e o
+usuário atualizar a página, ela deve permanecer minimizada. Se ela estiver
+aberta, assim ela deve permanecer. Até que o usuário clique para minimizar ou
+abrir novamente.
 
-Quando for incluir o elemento HTML dessa nova tarefa, coloque no
-`<li class="item-tarefa">` uma outra classe CSS com o nome `categoria-NOME`,
-em que NOME pode ser `lazer`, `compras` ou `estudos` (para as
-quais já existem regras CSS de estilização).
+Para minimizar o título (`#marca`), basta colocar a classe `.minimizado` nele,
+ou tirá-la para que ele fique aberto.
+
+Desta vez, em vez de salvar essa preferência (`minimizado`: `true` ou `false`)
+para sempre (isto é, no _localStorage_), se o usuário fechar o navegador
+e abrir a página novamente (em uma nova sessão, logo, vamos usar
+o _sessionStorage_), ele deve ver a logomarca aberta. Para tanto, assim que a
+página carregar, devemos olhar para o _sessionStorage_ para saber se devemos
+incluir a classe `.minimizado` na `#marca` ou não.
 
 
 ## FAQ
 
-1. Como posso criar novos elementos HTML na página?
-   - Conforme vimos nos [slides da aula js4][criando-elementos-dinamicamente],
-     usamos `let novoEl = document.createElement(qualTag)`, configuramos o
-     elemento (colocamos classes, atributos, `innerHTML` etc.) e o vinculamos
-     à árvore de elementos da página, com `containerEl.appendChild`,
-     `containerEl.insertBefore` ou `containerEl.replaceChild` (este, menos
-     usual).
-1. Como posso criar um objeto?
-   - Existe a (a) forma literal e (b) usando o operador `new`, conforme
-     vimos nos [slides da aula js4][criando-objetos].
-     ```js
-     // forma literal
-     let novoLivro = {
-       titulo: 'O Pistoleiro',
-       autor: 'Stephen King'
-     };
-     // usando operador 'new'
-     let novoCarro = new Object();
-     novoCarro.nome = 'Ka';
-     novoCarro.marca = 'Ford';
-     ```
-1. Como inserir um elemento ao final de um vetor?
+1. Qual a diferença entre **Web Storage**, `localStorage` e `sessionStorage`?
+   - **Web Storage** é o nome da tecnologia de armazenamento de dados que uma página Web pode pedir ao navegador para usar
+     - Há dois tipos de armazenamento:
+       - O `localStorage`, que dura para sempre (veja [os slides][local-storage]); e
+       - O `sessionStorage`, que tem a duração da "sessão" ([veja os slides][session-storage])
+         - Por exemplo, os dados são mantidos apenas até o usuário fechar o navegador
+1. Como posso salvar algo no `localStorage` ou no `sessionStorage`?
    ```js
-   let frutas = ['laranja', 'maçã'];
-   frutas.push('kiwi');
-   console.log(frutas);
-   // laranja, maçã, kiwi
+   localStorage.setItem('nome-do-que-estou-guardando', 'o-que-estou-realmente-armazenando');
+   sessionStorage.setItem('nome-do-que-estou-guardando', 'o-que-estou-realmente-armazenando');
    ```
-   - Veja os [slides da aula js2][array-push]
+1. Como posso recuperar algo que coloquei no `localStorage` ou no `sessionStorage`?
+   ```js
+   let valorGuardado1 = localStorage.getItem('nome-do-que-guardei');
+   let valorGuardado2 = sessionStorage.getItem('nome-do-que-guardei');
+   ```
+   - Lembre-se: tudo é armazenado e recuperado como _String_
+1. O que é esse `[object Object]`?
+   - Se o navegador tenta transformar um _Object_ em uma _String_ - por exemplo, se mandamos salvar um objeto no `localStorage`, o navegador invoca um método que todo objeto possui chamado `.toString()`
+   - O `objeto.toString()` é um método que tenta representar o objeto no formato de uma _String_. Por exemplo, se o objeto for uma `Date`, ele vai retornar uma _String_ com a data atual:
+
+     ![](docs/to-string-date.png)
+   - Contudo, para objetos "genéricos", o método `objeto.toString()` retorna sempre `"[object Object]"`:
+
+     ![](docs/to-string-object-object.png)
+   - Em vetores, quando chamamos `vetor.toString()`, o navegador chama o `toString` para cada item:
+
+    ![](docs/to-string-array.png)
+1. Como posso guardar um objeto no `localStorage`/`sessionStorage` de forma que eu consiga recuperá-lo depois?
+   - Veja os slides da aula sobre [como representar objetos em strings][representando-objetos-em-strings] e sobre [o formato JSON][o-formato-json]
+   - Conseguimos salvar/recuperar apenas _Strings_ com o Web Storage
+   - Contudo, é possível representar um objeto usando uma _String_
+     - Basta termos um formato para codificar as propriedades do objeto
+   - Para isso, usamos o formato JSON
+     - Para salvar, usamos `JSON.stringify(objeto)`, que retorna uma _String_
+       ```js
+       let meuCafe = { nome: 'pão', qtde: 1 };
+       let meuCafeEmString = JSON.stringify(meuCafe);
+
+       // agora, salvamos a 'meuCafeEmString' no localStorage
+       localStorage.setItem('cafe', meuCafeEmString);
+       ```
+     - Para recuperar, usamos `JSON.parse(umaString)`, que retorna o objeto:
+       ```js
+       let oQueComerString = localStorage.getItem('cafe');
+       let oQueComer = JSON.parse(oQueComerString);
+
+       console.log(oQueComer.nome); // imprime 'pão'
+       ```
+
 1. Como colocar/tirar uma classe em um elemento HTML?
    ```js
    ovelhaEl.classList.add('raca-de-ovelha');
@@ -157,7 +157,9 @@ quais já existem regras CSS de estilização).
    ```
    - Veja os [slides da aula js2][classes]
 
-[criando-elementos-dinamicamente]: https://fegemo.github.io/cefet-front-end/classes/js4/#criando-elementos-html-dinamicamente
-[criando-objetos]: https://fegemo.github.io/cefet-front-end/classes/js4/#usando-objetos-em-javascript
-[array-push]: https://fegemo.github.io/cefet-front-end/classes/js2/#metodos-de-arrays
+[local-storage]: https://fegemo.github.io/cefet-front-end/classes/js5/#local-storage
+[session-storage]: https://fegemo.github.io/cefet-front-end/classes/js5/#session-storage
+[formato-de-armazenamento]: https://fegemo.github.io/cefet-front-end/classes/js5/#o-formato-json#formato-de-armazenamento
+[representando-objetos-em-strings]: https://fegemo.github.io/cefet-front-end/classes/js5/#o-formato-json#representando-objetos-em-strings
+[o-formato-json]: https://fegemo.github.io/cefet-front-end/classes/js5/#o-formato-json
 [classes]: https://fegemo.github.io/cefet-front-end/classes/js2/#colocando-removendo-classes
