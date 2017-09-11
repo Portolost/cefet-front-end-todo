@@ -1,15 +1,4 @@
-let tarefas = [
-  {
-    nome: 'Comprar leite',
-    categoria: 'compras',
-    marcado: false
-  },
-  {
-    nome: 'Escutar chimbinha',
-    categoria: 'lazer',
-    marcado: true
-  }
-];
+let tarefas = [];
 
 // Exercício 1: carregar as tarefas existentes
 // ------------
@@ -62,4 +51,18 @@ botaoIncluirEl.addEventListener('click', function(e) {
   // limpar o input e devolver o foco pra ele
   nomeInputEl.value = '';
   nomeInputEl.focus();
+});
+
+
+// Exercício 3: salvar e carregar o nome do usuário dono da lista
+let carregarEl = document.querySelector('#carregar');
+let salvarEl = document.querySelector('#salvar');
+let nomeUsuarioEl = document.querySelector('#nome-usuario');
+// salva quem é o dono da lista no localStorage
+salvarEl.addEventListener('click', function(e) {
+  localStorage.setItem('dono-da-lista', nomeUsuarioEl.value);
+});
+// carrega o dono da lista e coloca no input
+carregarEl.addEventListener('click', function(e) {
+  nomeUsuarioEl.value = localStorage.getItem('dono-da-lista');
 });
