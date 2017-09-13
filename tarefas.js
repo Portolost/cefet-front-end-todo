@@ -82,3 +82,16 @@ carregarEl.addEventListener('click', function(e) {
   // do vetor 'tarefas'
   tarefas.forEach(insereTarefaNaPagina);
 });
+
+
+let minimizarEl = document.querySelector('#minimizar');
+let marcaEl = document.querySelector('#marca');
+minimizarEl.addEventListener('click', function(e) {
+  let minimizou = marcaEl.classList.toggle('minimizado');
+  sessionStorage.setItem('minimizado', minimizou);
+});
+
+let estaMinimizado = sessionStorage.getItem('minimizado');
+if (estaMinimizado === 'true') {
+  marcaEl.classList.add('minimizado');
+}
