@@ -64,10 +64,21 @@ let nomeUsuarioEl = document.querySelector('#nome-usuario');
 salvarEl.addEventListener('click', function(e) {
   localStorage.setItem('dono-da-lista', nomeUsuarioEl.value);
   // Exercício 4: tentando salvar o vetor de tarefas
-  localStorage.setItem('lista-de-tarefas', tarefas);
-  // salva [object Object] no localStorage :/
+  // localStorage.setItem('lista-de-tarefas', tarefas);
+
+  // Exercício 5: carrega o vetor de tarefas
+  localStorage.setItem('lista-de-tarefas', JSON.stringify(tarefas));
 });
+
 // carrega o dono da lista e coloca no input
 carregarEl.addEventListener('click', function(e) {
   nomeUsuarioEl.value = localStorage.getItem('dono-da-lista');
+
+  // Exercício 5: carrega o vetor de tarefas
+  tarefas = JSON.parse(localStorage.getItem('tarefas'));
+  // limpa a <ul> do que quer que esteja lá
+  containerEl.innerHTML = '';
+  // chama a função que insere na página para cada tarefa
+  // do vetor 'tarefas'
+  tarefas.forEach(insereTarefaNaPagina);
 });
