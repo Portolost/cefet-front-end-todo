@@ -1,4 +1,6 @@
-let tarefas = [];
+let tarefas = [
+  { nome: 'Chupar chiclete', categoria: 'lazer', marcado: false }
+];
 
 // Exercício 1: carregar as tarefas existentes
 // ------------
@@ -61,6 +63,9 @@ let nomeUsuarioEl = document.querySelector('#nome-usuario');
 // salva quem é o dono da lista no localStorage
 salvarEl.addEventListener('click', function(e) {
   localStorage.setItem('dono-da-lista', nomeUsuarioEl.value);
+  // Exercício 4: tentando salvar o vetor de tarefas
+  localStorage.setItem('lista-de-tarefas', tarefas);
+  // salva [object Object] no localStorage :/
 });
 // carrega o dono da lista e coloca no input
 carregarEl.addEventListener('click', function(e) {
